@@ -10,6 +10,7 @@ Using WP Rocket’s existing functions:
 1. Explain how they should implement the requirement to clear the cache at a specific time.
 2. Provide any piece of code necessary to perform the cache clearing task.
 
+### Issue 1 answer
 Hi mate,
 
 I would recommend sending the following to the client:
@@ -33,10 +34,11 @@ wget -q -O - http://yourdomain.com/rocket-clean-domain.php
 You need to pick the time to run the cron job from your CPanel as explained in this video: https://recordit.co/cl2YCoMCzu
 	
 
-3- Create a PHP file and name it: rocket-clean-domain.php
+4- Create a PHP file and name it: rocket-clean-domain.php
 Add the following code to rocket-clean-domain.php
 
-```<?php 
+```
+<?php 
 // Load WordPress.
 require( 'wp-load.php' );
 
@@ -44,12 +46,14 @@ require( 'wp-load.php' );
 if ( function_exists( 'rocket_clean_domain' ) ) {
 	rocket_clean_domain();
  }
+ 
 // Preload cache.
 if ( function_exists( 'run_rocket_sitemap_preload' ) ) {
 	run_rocket_sitemap_preload();
-}```
+}
+```
 
-4- Upload this file to your WordPress installation's root ( where wp-config.php and wp-load.php are located).
+5- Upload this file to your WordPress installation's root ( where wp-config.php and wp-load.php are located).
 Note: If you place it in a different location, you need to edit the path in require( 'wp-load.php' ); above to match its location.
 
 This page will guide you on how to use a cron job and clear the cache manually:
@@ -68,6 +72,7 @@ Assume that:
 - you have tested your code on your environment and it works fine and
 - the customer has provided you access to their site/server.
 
+### Issue 2 answer
 You need to check if the wp-cron is disabled in the client wp-config.php file and make sure it has been replaced with a server cron.
 
 If you have done these things but are seeing the notice anyway, please redirect the client to contact his website host to check if and why cron is not working as expected.
